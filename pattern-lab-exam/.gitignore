@@ -1,1 +1,5 @@
 .venv/
+*.csv
+*.log
+*.sqlite3
+*.pdf
