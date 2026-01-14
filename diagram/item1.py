@@ -54,7 +54,7 @@ def create_architecture_diagram():
     # 1. Dataset Split (Floating Node)
     # Using 'cylinder' shape for database
     dot.node('Split', 
-             label='<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="path/to/db_icon.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>>', 
+             label='<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/data-split.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>>', 
              shape='cylinder', style='filled', fillcolor='#e1f5fe', color='#01579b')
 
     # Subgraph 1: Data Prep
@@ -62,7 +62,7 @@ def create_architecture_diagram():
         c.attr(label='Stage 1: Input Processing', style='dashed', color='grey')
         
         # HTML labels allow us to insert image placeholders easily
-        label_raw = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="PLACEHOLDER_ICON"/></TD></TR><TR><TD>Raw Bengali Data</TD></TR></TABLE>>'
+        label_raw = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/raw.png"/></TD></TR><TR><TD>Raw Bengali Data</TD></TR></TABLE>>'
         c.node('Raw', label_raw, **data_attr)
         
         c.node('Pre', 'Preprocessing\n(Tokenization)', **process_attr)
