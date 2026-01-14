@@ -1,0 +1,48 @@
+// Bengali Dialect & NER System
+digraph DualPhase_Architecture {
+	nodesep=0.6 rankdir=LR ranksep=0.8 splines=ortho
+	Split [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="path/to/db_icon.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>> color="#01579b" fillcolor="#e1f5fe" shape=cylinder style=filled]
+	subgraph cluster_0 {
+		color=grey label="Stage 1: Input Processing" style=dashed
+		Raw [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="PLACEHOLDER_ICON"/></TD></TR><TR><TD>Raw Bengali Data</TD></TR></TABLE>> color="#01579b" fillcolor="#e1f5fe" fontname=Helvetica penwidth=2 shape=box style="filled, rounded"]
+		Pre [label="Preprocessing
+(Tokenization)" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
+		Emb [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD>Word Embedding</TD></TR><TR><TD><FONT POINT-SIZE="10">FastText 300D</FONT></TD></TR></TABLE>> color="#01579b" fillcolor="#e1f5fe" fontname=Helvetica penwidth=2 shape=box style="filled, rounded"]
+		Raw -> Pre
+		Pre -> Emb [label=Encoding]
+	}
+	subgraph cluster_1 {
+		color=grey label="Stage 2: Dialect Detection" style=dashed
+		Model1 [label="Model A:
+CNN + BiLSTM" color="#e65100" fillcolor="#fff3e0" fontname="Helvetica-Bold" penwidth=2 shape=component style=filled]
+		Model2 [label="Model B:
+BiLSTM + MHA" color="#e65100" fillcolor="#fff3e0" fontname="Helvetica-Bold" penwidth=2 shape=component style=filled]
+		Classifier [label="Global Pooling
+& Classifier" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
+		Pred_Dialect [label="Predicted Dialect
+Category" color="#1b5e20" fillcolor="#e8f5e9" fontname="Helvetica-Bold" penwidth=2 shape=hexagon style=filled]
+		Model1 -> Classifier
+		Model2 -> Classifier
+		Classifier -> Pred_Dialect
+	}
+	subgraph cluster_2 {
+		color=grey label="Stage 3: Dialect-Specific NER" style=dashed
+		NER_Model [label="BiLSTM-CRF
+Architecture" color="#e65100" fillcolor="#fff3e0" fontname="Helvetica-Bold" penwidth=2 shape=component style=filled]
+		Hidden [label="Hidden States" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
+		Emission [label="Emission Scores
+(Linear Trans.)" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
+		Global_Decode [label="CRF Layer
+(Global Decoding)" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
+		NER_Model -> Hidden [label="Seq. Process"]
+		Hidden -> Emission
+		Emission -> Global_Decode
+	}
+	Output [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="PLACEHOLDER_ICON"/></TD></TR><TR><TD>Final Output</TD></TR><TR><TD><FONT POINT-SIZE="10">NER Tags (BIO Format)</FONT></TD></TR></TABLE>> color="#1b5e20" fillcolor="#e8f5e9" fontname="Helvetica-Bold" penwidth=2 shape=hexagon style=filled]
+	Split -> Raw [constraint=false style=dotted]
+	Emb -> Model1
+	Emb -> Model2
+	Emb -> NER_Model [label="Re-Embedding" color="#01579b" style=dashed]
+	Pred_Dialect -> NER_Model [label="Selects Specific Model" color="#d50000" penwidth=3]
+	Global_Decode -> Output
+}
