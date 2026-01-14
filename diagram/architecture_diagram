@@ -1,7 +1,7 @@
 // Bengali Dialect & NER System
 digraph DualPhase_Architecture {
 	nodesep=0.6 rankdir=LR ranksep=0.8 splines=ortho
-	Split [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/db.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>> color="#01579b" fillcolor="#e1f5fe" shape=cylinder style=filled]
+	Split [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/data-split.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>> color="#01579b" fillcolor="#e1f5fe" shape=cylinder style=filled]
 	subgraph cluster_0 {
 		color=grey label="Stage 1: Input Processing" style=dashed
 		Raw [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/raw.png"/></TD></TR><TR><TD>Raw Bengali Data</TD></TR></TABLE>> color="#01579b" fillcolor="#e1f5fe" fontname=Helvetica penwidth=2 shape=box style="filled, rounded"]
