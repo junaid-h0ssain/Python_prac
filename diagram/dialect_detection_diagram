@@ -1,6 +1,6 @@
 // Dialect Detection Architecture
 digraph Dialect_Detection_Flow {
-	nodesep=0.6 rankdir=TB ranksep=0.6 splines=ortho
+	nodesep=0.6 rankdir=TB ranksep=0.6
 	subgraph cluster_input {
 		color=grey label="Preprocessing Phase" style=dashed
 		Input [label="Input Sentence" color="#01579b" fillcolor="#e1f5fe" fontname=Helvetica penwidth=2 shape=box style="filled, rounded"]
@@ -13,15 +13,15 @@ Vocabulary Mapping" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwi
 	subgraph cluster_models {
 		color=grey label="Feature Extraction Architectures" style=dashed
 		Model_CNN [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Model A</B></TD></TR><TR><TD>CNN + BiLSTM</TD></TR><TR><TD><FONT POINT-SIZE="10">(Local n-gram features)</FONT></TD></TR></TABLE>> color="#e65100" fillcolor="#fff3e0" fontname="Helvetica-Bold" penwidth=2 shape=component style=filled]
-		Model_MHA [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Model B</B></TD></TR><TR><TD>BiLSTM + MHA</TD></TR><TR><TD><FONT POINT-SIZE="10">(Global Context & Attention)</FONT></TD></TR></TABLE>> color="#e65100" fillcolor="#fff3e0" fontname="Helvetica-Bold" penwidth=2 shape=component style=filled]
+		Model_MHA [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Model B</B></TD></TR><TR><TD>BiLSTM + MHA</TD></TR><TR><TD><FONT POINT-SIZE="10">(Global Context &amp; Attention)</FONT></TD></TR></TABLE>> color="#e65100" fillcolor="#fff3e0" fontname="Helvetica-Bold" penwidth=2 shape=component style=filled]
 	}
 	subgraph cluster_output {
 		color=grey label="Classification Head" style=dashed
-		Pool [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Global Pooling</B></TD></TR><TR><TD>Max & Average</TD></TR><TR><TD><FONT POINT-SIZE="10">Fixed Size Vector (512D)</FONT></TD></TR></TABLE>> color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
+		Pool [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Global Pooling</B></TD></TR><TR><TD>Max &amp; Average</TD></TR><TR><TD><FONT POINT-SIZE="10">Fixed Size Vector (512D)</FONT></TD></TR></TABLE>> color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
 		Dense [label="Dense Layer" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
 		Softmax [label="Softmax
 Activation" color="#4a148c" fillcolor="#f3e5f5" fontname=Helvetica penwidth=2 shape=note style=filled]
-		Output [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="PLACEHOLDER_ICON"/></TD></TR><TR><TD>Dialect Class</TD></TR></TABLE>> color="#1b5e20" fillcolor="#e8f5e9" fontname="Helvetica-Bold" penwidth=2 shape=hexagon style=filled]
+		Output [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD>Dialect Class</TD></TR></TABLE>> color="#1b5e20" fillcolor="#e8f5e9" fontname="Helvetica-Bold" penwidth=2 shape=hexagon style=filled]
 		Pool -> Dense
 		Dense -> Softmax
 		Softmax -> Output

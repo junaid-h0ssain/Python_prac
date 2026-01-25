@@ -4,7 +4,7 @@ def create_dialect_diagram():
     # Initialize the graph
     # 'TB' sets the direction from Top to Bottom (Vertical)
     dot = Digraph('Dialect_Detection_Flow', comment='Dialect Detection Architecture')
-    dot.attr(rankdir='TB', splines='ortho', nodesep='0.6', ranksep='0.6')
+    dot.attr(rankdir='TB', nodesep='0.6', ranksep='0.6')
     
     # --- Define Styles (Consistent with previous diagram) ---
     # Data/Input Nodes (Blueish)
@@ -50,7 +50,7 @@ def create_dialect_diagram():
     # --- Constructing the Graph ---
 
     # 1. Input Stage
-    with dot.subgraph(name='cluster_input') as c:
+    with dot.subgraph(name='cluster_input') as c: # type: ignore
         c.attr(label='Preprocessing Phase', style='dashed', color='grey')
         
         c.node('Input', 'Input Sentence', **data_attr)
@@ -64,7 +64,7 @@ def create_dialect_diagram():
         c.edge('Token', 'Emb', label='Token IDs')
 
     # 2. Parallel Model Architecture
-    with dot.subgraph(name='cluster_models') as c:
+    with dot.subgraph(name='cluster_models') as c: # type: ignore
         c.attr(label='Feature Extraction Architectures', style='dashed', color='grey')
         
         # Branch 1: CNN + BiLSTM
@@ -72,22 +72,22 @@ def create_dialect_diagram():
         c.node('Model_CNN', label_m1, **model_attr)
         
         # Branch 2: BiLSTM + MHA
-        label_m2 = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Model B</B></TD></TR><TR><TD>BiLSTM + MHA</TD></TR><TR><TD><FONT POINT-SIZE="10">(Global Context & Attention)</FONT></TD></TR></TABLE>>'
+        label_m2 = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Model B</B></TD></TR><TR><TD>BiLSTM + MHA</TD></TR><TR><TD><FONT POINT-SIZE="10">(Global Context &amp; Attention)</FONT></TD></TR></TABLE>>'
         c.node('Model_MHA', label_m2, **model_attr)
 
     # 3. Aggregation & Classification
-    with dot.subgraph(name='cluster_output') as c:
+    with dot.subgraph(name='cluster_output') as c: # type: ignore
         c.attr(label='Classification Head', style='dashed', color='grey')
         
         # Pooling Node
-        label_pool = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Global Pooling</B></TD></TR><TR><TD>Max & Average</TD></TR><TR><TD><FONT POINT-SIZE="10">Fixed Size Vector (512D)</FONT></TD></TR></TABLE>>'
+        label_pool = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><B>Global Pooling</B></TD></TR><TR><TD>Max &amp; Average</TD></TR><TR><TD><FONT POINT-SIZE="10">Fixed Size Vector (512D)</FONT></TD></TR></TABLE>>'
         c.node('Pool', label_pool, **process_attr)
         
         c.node('Dense', 'Dense Layer', **process_attr)
         c.node('Softmax', 'Softmax\nActivation', **process_attr)
         
         # Final Output with Icon Placeholder
-        label_out = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="PLACEHOLDER_ICON"/></TD></TR><TR><TD>Dialect Class</TD></TR></TABLE>>'
+        label_out = '<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD>Dialect Class</TD></TR></TABLE>>'
         c.node('Output', label_out, **result_attr)
         
         c.edge('Pool', 'Dense')
