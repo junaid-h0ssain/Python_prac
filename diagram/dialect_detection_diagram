@@ -1,6 +1,6 @@
 // Dialect Detection Architecture
 digraph Dialect_Detection_Flow {
-	nodesep=0.6 rankdir=LR ranksep=0.6 splines=ortho
+	nodesep=0.6 rankdir=TB ranksep=0.6 splines=ortho
 	subgraph cluster_input {
 		color=grey label="Preprocessing Phase" style=dashed
 		Input [label="Input Sentence" color="#01579b" fillcolor="#e1f5fe" fontname=Helvetica penwidth=2 shape=box style="filled, rounded"]

@@ -2,9 +2,9 @@ from graphviz import Digraph
 
 def create_dialect_diagram():
     # Initialize the graph
-    # 'LR' sets the direction from Left to Right (Horizontal)
+    # 'TB' sets the direction from Top to Bottom (Vertical)
     dot = Digraph('Dialect_Detection_Flow', comment='Dialect Detection Architecture')
-    dot.attr(rankdir='LR', splines='ortho', nodesep='0.6', ranksep='0.6')
+    dot.attr(rankdir='TB', splines='ortho', nodesep='0.6', ranksep='0.6')
     
     # --- Define Styles (Consistent with previous diagram) ---
     # Data/Input Nodes (Blueish)
