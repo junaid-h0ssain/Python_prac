@@ -2,9 +2,9 @@ from graphviz import Digraph
 
 def create_architecture_diagram():
     # Initialize the graph
-    # 'LR' sets the direction from Left to Right
+    # 'TB' sets the direction from Top to Bottom
     dot = Digraph('DualPhase_Architecture', comment='Bengali Dialect & NER System')
-    dot.attr(rankdir='LR', splines='ortho', nodesep='0.6', ranksep='0.8')
+    dot.attr(rankdir='TB', splines='ortho', nodesep='0.6', ranksep='0.8')
     
     # --- Define Styles ---
     # We define attributes for different types of nodes based on your request
@@ -54,8 +54,8 @@ def create_architecture_diagram():
     # 1. Dataset Split (Floating Node)
     # Using 'cylinder' shape for database
     dot.node('Split', 
-             label='<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/data-split.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>>', 
-             shape='cylinder', style='filled', fillcolor='#e1f5fe', color='#01579b')
+            label='<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0"><TR><TD><IMG SRC="./icons/data-split.png"/></TD></TR><TR><TD>Dataset Split</TD></TR><TR><TD><FONT POINT-SIZE="10">Train 80% / Test 20%</FONT></TD></TR></TABLE>>', 
+            shape='cylinder', style='filled', fillcolor='#e1f5fe', color='#01579b')
 
     # Subgraph 1: Data Prep
     with dot.subgraph(name='cluster_0') as c:
